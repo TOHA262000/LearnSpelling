@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import WordData from "../../data/WordData";
+import formatCategoryName from "../../components/formatCategoryName";
 
 export default function PracticeMode() {
   const [started, setStarted] = useState(false);
@@ -100,9 +101,8 @@ export default function PracticeMode() {
             {row.map((key) => (
               <div
                 key={key}
-                className={`w-10 h-10 flex items-center justify-center border rounded ${
-                  typed.includes(key) ? "bg-blue-400 text-white" : "bg-gray-200"
-                }`}
+                className={`w-10 h-10 flex items-center justify-center border rounded ${typed.includes(key) ? "bg-blue-400 text-white" : "bg-gray-200"
+                  }`}
               >
                 {key}
               </div>
@@ -140,11 +140,10 @@ export default function PracticeMode() {
           {attempts.map((attempt, i) => (
             <li
               key={i}
-              className={`py-1 ${
-                feedback[i]
+              className={`py-1 ${feedback[i]
                   ? "text-green-600 font-semibold"
                   : "text-red-500 font-semibold"
-              }`}
+                }`}
             >
               Attempt {i + 1}: {attempt} — {feedback[i] ? "Correct ✅" : "Wrong ❌"}
             </li>
@@ -171,9 +170,10 @@ export default function PracticeMode() {
             <option value="">-- Select a category --</option>
             {Object.keys(WordData).map((category) => (
               <option key={category} value={category}>
-                {category}
+                {formatCategoryName(category)}
               </option>
             ))}
+
           </select>
         </div>
       ) : !started ? (

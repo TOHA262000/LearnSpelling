@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import WordData from "../../data/WordData";
-
+import formatCategoryName from "../../components/formatCategoryName";
 const SpellingTest = () => {
   const categories = ["all", ...Object.keys(WordData)];
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
@@ -99,9 +99,10 @@ const SpellingTest = () => {
             >
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
-                  {cat === "all" ? "All Words" : cat}
+                  {formatCategoryName(cat)}
                 </option>
               ))}
+
 
             </select>
           </div>
