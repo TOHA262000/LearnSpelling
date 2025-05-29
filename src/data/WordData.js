@@ -1,5 +1,3 @@
-// WordData.js
-
 const WordData = {
   daysOfWeek: [
     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
@@ -10,7 +8,6 @@ const WordData = {
     "January", "February", "March", "April", "May", "June", "July", "August",
     "September", "October", "November", "December"
   ],
-
   moneyMatters: [
     "cash", "debit", "credit card", "cheque", "in advance", "annual fee",
     "monthly membership", "interest rate", "deposit", "tuition fees", "poverty",
@@ -28,7 +25,6 @@ const WordData = {
     "mathematics", "logic", "physics", "psychology", "anthropology", "economics",
     "philosophy", "performing arts", "visual arts", "chemistry", "humanities"
   ],
-
   studyingAtCollege: [
     "course outline", "group discussion", "handout", "written work", "report writing",
     "research", "proofreading", "experiment", "experience", "reference", "textbook",
@@ -46,6 +42,10 @@ const WordData = {
     "publication", "foreign students", "schedule", "school reunion", "registrar’s office",
     "stationery"
   ],
+
+
+
+
 
   marketing: [
     "catalogue", "interview", "newsletter", "competition", "TV program", "strategies",
@@ -151,20 +151,6 @@ const WordData = {
     "hostel", "suite", "aquarium"
   ],
 
-  verbs: [
-    "train", "develop", "collect", "supervise", "mark", "edit", "revise", "exhibit",
-    "donate", "surpass", "register", "support", "hunt", "persuade", "concentrate",
-    "discuss", "suggest", "arrange", "borrow", "immigrate", "review", "learn", "touch"
-  ],
-
-  adjectives: [
-    "energetic", "social", "ancient", "necessary", "fantastic", "exciting", "fabulous",
-    "dull", "comfortable", "convenient", "suitable", "affordable", "voluntary", "mandatory",
-    "compulsory", "temporary", "permanent", "immense", "vast", "salty", "extinct",
-    "vulnerable", "pessimistic", "optimistic", "realistic", "practical", "knowledgeable",
-    "flexible", "confident", "Western", "intensive", "tranquil", "spectacular",
-    "intact", "various"
-  ],
 
   hobbies: [
     "orienteering", "caving", "spelunking", "archery", "ice skating", "scuba-diving",
@@ -190,20 +176,71 @@ const WordData = {
     "circular", "curved", "cylindrical"
   ],
 
-  measurements: [
+  measurement: [
     "width", "length", "altitude", "imperial system", "metric system", "mass",
-    "depth", "breadth", "height", "three dimensions", "frequency"
+    "depth", "breadth", "height", "three dimensions", "frequency",
   ],
 
   transportations: [
-    "cargo plane", "shipment", "container ship", "boat", "lifeboat", "harbor",
-    "quay", "ferry", "overland transport", "luggage", "customs", "passport",
-    "check-in", "airport", "airport shuttle", "terminal", "boarding pass",
-    "flight", "coach", "car rental", "taxi", "ticket office", "train station",
-    "platform", "departure", "arrival", "car park", "motorbike", "motorcycle",
-    "bicycle", "bus stop", "underground", "subway", "tram", "trolleybus"
+    "cargo plane", "shipment", "container ship", "boat", "lifeboat",
+    "ferry", "hovercraft", "hydrofoil", "liner", "canal boat", "narrowboat", "dinghy sailing", "sailboat",
+    "paddle steamer", "cabin cruiser", "rowing boat", "rowboat", "kayak", "canoe", "punt", "gondola",
+    "aircraft", "helicopter", "seaplane", "airship", "hot-air balloon", "airport", "crew", "passenger",
+    "platform", "hire a car", "automobile", "double-decker bus", "single-decker", "minibus", "school bus", "coach", "truck",
+    "tanker", "van", "lorry", "transporter", "forklift truck", "tow truck", "breakdown truck", "pickup", "jeep",
+    "caravan", "camper", "tractor", "taxi", "cab", "tram", "underground", "subway", "stream train", "freight train", "goods train",
   ],
 
+  weather: [
+    "humid", "hot", "sticky", "breeze", "chilly", "cold", "cool", "dry", "dusty",
+    "freezing", "hot", "warm", "wet", "weather forecast", "antenna", "moisture",
+  ],
+
+  places: [
+    "local library", "swimming pool", "cafeteria", "cottage", "parliament",
+    "accommodation", "restaurant", "canteen", "cafe", "bookshop",
+    "sports centre", "city council", "dance studio", "park", "conversation club",
+    "kindergarten",
+  ],
+
+  equipmentAndTools: [
+    "helmet", "light", "musical instrument", "cassette", "silicon chip",
+    "digital monitor", "gadget", "device", "screen", "breaks", "wheels",
+    "mechanical pencil", "disk", "backpack",
+  ],
+
+
+  theArtsAndMedia: [
+    "opera", "orchestra", "concert", "symphony", "the press", "conductor", "vocalist",
+    "audience", "festival", "carnival", "exhibition", "classical music", "theatre",
+    "cinemas", "art gallery", "museum", "ballet", "television", "radio", "graphics", "newspaper",
+  ],
+   Materials: [
+    "fur", "metal", "steel", "aluminum", "copper", "rubber", "plastic", "ceramics", "glass",
+    "cement", "stone", "textile", "cotton", "fabric", "wool", "leather", "bone", "paper",
+    "lumber", "wood", "glue", "composite", "fiberglass", "concrete", "wax", "silver",
+    "gold", "feather"
+  ],
+  WorksAndJobs: [
+    "occupation", "profession", "designer", "decorator", "architect", "engineer",
+    "manager", "waitress", "waiter", "teacher", "vacancy", "professor", "specialist",
+    "psychologist", "volunteer", "freelance", "secretary", "craftsman", "work experience",
+    "curriculum vitae", "mail address", "receptionist", "pilot", "guard", "flight attendant",
+    "lecturer", "office assistant", "clerk", "accountant", "cashier", "captain"
+  ],
+ 
+  ExpressionsAndTime: [
+    "three times", "three times per week", "a gap year", "fulltime", "part-time",
+    "midday", "midnight", "millennium", "century", "decade", "fortnight"
+  ],
+  colors: [
+    "blue", "white", "orange", "green", "grey", "black", "red", "yellow", "purple", "brown", "pink"],
+
+  verbs: [
+    "train", "develop", "collect", "supervise", "mark", "edit", "revise", "exhibit",
+    "donate", "surpass", "register", "support", "hunt", "persuade", "concentrate",
+    "discuss", "suggest", "arrange", "borrow", "immigrate", "review", "learn", "touch"
+  ],
   verbsPhrases: [
     "give up", "look after", "come across", "get on with", "catch up", "go over",
     "drop out", "turn up", "work out", "fill in", "hand in", "put off", "take up",
@@ -211,25 +248,30 @@ const WordData = {
     "come up with", "carry on", "make up", "get along", "set up", "pick up", "look out",
     "give in", "take after", "go through", "turn down"
   ],
-
-  questionWords: [
-    "who", "what", "where", "when", "why", "how", "which", "whose"
+  adjectives: [
+    "energetic", "social", "ancient", "necessary", "fantastic", "exciting", "fabulous",
+    "dull", "comfortable", "convenient", "suitable", "affordable", "voluntary", "mandatory",
+    "compulsory", "temporary", "permanent", "immense", "vast", "salty", "extinct",
+    "vulnerable", "pessimistic", "optimistic", "realistic", "practical", "knowledgeable",
+    "flexible", "confident", "Western", "intensive", "tranquil", "spectacular",
+    "intact", "various"
   ],
 
-  prepositions: [
-    "at", "in", "on", "under", "over", "between", "next to", "behind", "in front of",
-    "near", "above", "below", "through", "across", "along", "against", "towards"
+  Others: [
+    "passport photo", "state", "government", "individual", "variety", "private sector",
+    "practice", "gender", "creativity", "original inhabitant", "indigenous", "demonstration",
+    "strike", "entrance", "circuit", "guarantee", "dialogue", "commerce", "carriage",
+    "narrative", "chocolate", "satellite", "decision", "prototype", "attitude",
+    "daily routine", "personal fulfillment", "activity", "recipient", "ultrasound",
+    "pedestrian safety", "traffic jams", "procedures", "creation", "prize", "junior",
+    "senior", "opportunity", "driving license", "process", "literary", "man-made",
+    "republicans", "umbrella", "frequently updated", "waiting list", "sewer systems",
+    "liberal democracy", "democrats", "lunar calendar", "libertarian", "burger",
+    "videos", "nature conservation", "life expectancy", "fund-raising event", "magnet",
+    "dialect", "ramification", "straight", "farewell", "welfare", "encyclopedia",
+    "evolution", "revolution", "illiteracy", "robot", "proficiency", "sufficient"
   ],
 
-  pronouns: [
-    "I", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them",
-    "my", "your", "his", "her", "its", "our", "their", "mine", "yours", "hers", "ours", "theirs"
-  ],
-
-  conjunctions: [
-    "and", "but", "or", "because", "so", "although", "while", "unless", "if", "when",
-    "before", "after", "since", "until"
-  ]
 };
 
 export default WordData;

@@ -141,8 +141,8 @@ export default function PracticeMode() {
             <li
               key={i}
               className={`py-1 ${feedback[i]
-                  ? "text-green-600 font-semibold"
-                  : "text-red-500 font-semibold"
+                ? "text-green-600 font-semibold"
+                : "text-red-500 font-semibold"
                 }`}
             >
               Attempt {i + 1}: {attempt} — {feedback[i] ? "Correct ✅" : "Wrong ❌"}
@@ -177,10 +177,9 @@ export default function PracticeMode() {
           </select>
         </div>
       ) : !started ? (
-        <div className="text-center">
+        <div className="text-center space-x-4">
           <p className="mb-4">
-            You will type each word 3 times. The last time, the word will be
-            hidden.
+            You will type each word 3 times. The last time, the word will be hidden.
           </p>
           <button
             onClick={() => {
@@ -190,6 +189,12 @@ export default function PracticeMode() {
             className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
           >
             Start
+          </button>
+          <button
+            onClick={() => setSelectedCategory("")}
+            className="bg-gray-400 text-white px-6 py-2 rounded hover:bg-gray-500"
+          >
+            Back
           </button>
         </div>
       ) : (
