@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import WordData from "../../data/WordData";
 import formatCategoryName from "../../components/formatCategoryName";
-
+import useSpeechSynthesis from "../../hook/useSpeechSynthesis";
 export default function PracticeMode() {
+  const { speak,selectedVoice } = useSpeechSynthesis();
   const [started, setStarted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [words, setWords] = useState([]);
@@ -11,15 +12,9 @@ export default function PracticeMode() {
   const [currentAttempt, setCurrentAttempt] = useState(0);
   const [feedback, setFeedback] = useState([]);
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
-
   const inputRef = useRef(null);
-
   const currentWord = words[currentWordIndex] || "";
 
-  const speakWord = (word) => {
-    const utterance = new SpeechSynthesisUtterance(word);
-    window.speechSynthesis.speak(utterance);
-  };
 
   useEffect(() => {
     if (started && inputRef.current) {
@@ -80,7 +75,7 @@ export default function PracticeMode() {
       setCurrentAttempt(0);
       setFeedback([]);
       setIsFeedbackVisible(false);
-      speakWord(words[currentWordIndex + 1]);
+      speak(words[currentWordIndex + 1]);
     } else {
       setStarted(false);
     }
@@ -184,7 +179,7 @@ export default function PracticeMode() {
           <button
             onClick={() => {
               setStarted(true);
-              speakWord(currentWord);
+              speak(currentWord);
             }}
             className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
           >
@@ -205,7 +200,7 @@ export default function PracticeMode() {
 
           <div className="text-center mb-4">
             <button
-              onClick={() => speakWord(currentWord)}
+              onClick={() => speak(currentWord)}
               className="text-blue-600 underline"
             >
               🔊 Listen

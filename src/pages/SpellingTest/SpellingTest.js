@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import WordData from "../../data/WordData";
 import formatCategoryName from "../../components/formatCategoryName";
+import useSpeechSynthesis from "../../hook/useSpeechSynthesis";
 const SpellingTest = () => {
   const categories = ["all", ...Object.keys(WordData)];
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
@@ -11,6 +12,8 @@ const SpellingTest = () => {
   const [inputValue, setInputValue] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [testStarted, setTestStarted] = useState(false);
+  const { speak } = useSpeechSynthesis();
+
 
   const inputRef = useRef(null);
 
@@ -39,20 +42,14 @@ const SpellingTest = () => {
     setInputValue("");
     setShowResult(false);
     setTestStarted(true);
+    setTimeout(() => {
+      speak(shuffled[0]);
+    }, 500); // Speak the first word after starting
+
   };
 
   // Speech synthesis for current word
-  const speakCurrentWord = () => {
-    if (testWords.length === 0 || showResult) return;
-    const utterance = new SpeechSynthesisUtterance(testWords[currentIndex]);
-    speechSynthesis.speak(utterance);
-  };
 
-  useEffect(() => {
-    if (testStarted) {
-      speakCurrentWord();
-    }
-  }, [currentIndex, testWords, showResult, testStarted]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -66,11 +63,16 @@ const SpellingTest = () => {
       setInputValue("");
 
       if (currentIndex + 1 < testWords.length) {
-        setCurrentIndex(currentIndex + 1);
+        const nextIndex = currentIndex + 1;
+        setCurrentIndex(nextIndex);
+        setTimeout(() => {
+          speak(testWords[nextIndex]);
+        }, 300); // ✅ speak the next word
       } else {
         setShowResult(true);
         setTestStarted(false);
       }
+
     }
   };
 
@@ -168,7 +170,7 @@ const SpellingTest = () => {
               spellCheck="false"
             />
             <button
-              onClick={speakCurrentWord}
+              onClick={() => speak(testWords[currentIndex])}
               aria-label="Listen Again"
               className="p-3 bg-blue-600 hover:bg-blue-700 rounded text-white shadow-md transition-colors"
               title="Listen again"
