@@ -207,10 +207,10 @@ export default function PracticeMode() {
             Word {currentWordIndex + 1} of {words.length}
           </p>
 
-          <div className="text-center mb-4 space-x-2">
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
             <button
               onClick={() => speak(currentWord)}
-              className="text-blue-600 underline"
+              className="flex items-center gap-1 px-4 py-2 bg-indigo-100 text-indigo-700 border border-indigo-300 rounded hover:bg-indigo-200 transition"
             >
               🔊 Listen
             </button>
@@ -218,26 +218,33 @@ export default function PracticeMode() {
             <button
               onClick={goToPreviousWord}
               disabled={currentWordIndex === 0}
-              className={`px-4 py-1 border rounded ${currentWordIndex === 0 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white hover:bg-blue-600"}`}
+              className={`flex items-center gap-1 px-4 py-2 border rounded transition ${currentWordIndex === 0
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
+                }`}
             >
-              ⬅️ Previous Word
+              ⬅️ Previous
             </button>
 
             <button
               onClick={goToNextWord}
               disabled={currentWordIndex === words.length - 1}
-              className={`px-4 py-1 border rounded ${currentWordIndex === words.length - 1 ? "bg-gray-300 cursor-not-allowed" : "bg-green-500 text-white hover:bg-green-600"}`}
+              className={`flex items-center gap-1 px-4 py-2 border rounded transition ${currentWordIndex === words.length - 1
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-green-500 text-white hover:bg-green-600"
+                }`}
             >
-              ➡️ Next Word
+              Next ➡️
             </button>
 
             <button
               onClick={handleBackToCategory}
-              className="px-4 py-1 border rounded bg-red-500 text-white hover:bg-red-600"
+              className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
             >
-              🔙 Choose Another Category
+              🔙 Choose Category
             </button>
           </div>
+
 
 
           {renderAttemptInput()}
