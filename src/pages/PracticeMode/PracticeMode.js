@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import WordData from "../../data/WordData";
 import formatCategoryName from "../../components/formatCategoryName";
 import useSpeechSynthesis from "../../hook/useSpeechSynthesis";
+import toast, { Toaster } from "react-hot-toast";
 export default function PracticeMode() {
   const { speak } = useSpeechSynthesis();
   const [started, setStarted] = useState(false);
@@ -11,7 +12,6 @@ export default function PracticeMode() {
   const [attempts, setAttempts] = useState(["", "", ""]);
   const [currentAttempt, setCurrentAttempt] = useState(0);
   const [feedback, setFeedback] = useState([]);
-  const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
   const inputRef = useRef(null);
   const currentWord = words[currentWordIndex] || "";
 
@@ -30,7 +30,6 @@ export default function PracticeMode() {
       setAttempts(["", "", ""]);
       setCurrentAttempt(0);
       setFeedback([]);
-      setIsFeedbackVisible(false);
     }
   }, [selectedCategory]);
 
@@ -48,7 +47,38 @@ export default function PracticeMode() {
 
       setTimeout(() => {
         if (currentAttempt === 2) {
-          setIsFeedbackVisible(true);
+          const resultsText = updatedAttempts
+            .map((attempt, i) => {
+              const attemptNum = `${i + 1}${["st", "nd", "rd"][i] || "th"} attempt`;
+              const status = updatedFeedback[i] ? "✅ Correct" : "❌ Wrong";
+              return `${attemptNum}: ${attempt} — ${status}`;
+            })
+            .join("\n");
+
+          toast(
+            <div className="text-center whitespace-pre-line leading-relaxed">
+              <h2 className="text-base font-semibold text-blue-400 mb-2">
+                {currentWord}
+              </h2>
+              <p className="text-sm">{resultsText}</p>
+            </div>,
+            {
+              duration: 5000,
+              position: "top-center",
+              style: {
+                background: "#1f2937", // dark gray
+                color: "#f9fafb", // near white
+                fontSize: "15px",
+                padding: "16px 24px",
+                borderRadius: "12px",
+                boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
+                maxWidth: "320px",
+                margin: "0 auto",
+              },
+            }
+          );
+
+          // Move to next word after showing the toast
           setTimeout(() => {
             goToNextWord();
           }, 2000);
@@ -56,6 +86,8 @@ export default function PracticeMode() {
           setCurrentAttempt(currentAttempt + 1);
         }
       }, 500);
+
+
     }
   };
 
@@ -65,7 +97,6 @@ export default function PracticeMode() {
       setAttempts(["", "", ""]);
       setCurrentAttempt(0);
       setFeedback([]);
-      setIsFeedbackVisible(false);
       speak(words[currentWordIndex + 1]);
     } else {
       setStarted(false);
@@ -77,7 +108,6 @@ export default function PracticeMode() {
       setAttempts(["", "", ""]);
       setCurrentAttempt(0);
       setFeedback([]);
-      setIsFeedbackVisible(false);
       speak(words[currentWordIndex - 1]);
     }
   };
@@ -88,7 +118,6 @@ export default function PracticeMode() {
     setAttempts(["", "", ""]);
     setCurrentAttempt(0);
     setFeedback([]);
-    setIsFeedbackVisible(false);
   };
   const renderKeyboard = () => {
     const layout = [
@@ -136,29 +165,9 @@ export default function PracticeMode() {
     );
   };
 
-  const renderFeedback = () => {
-    return (
-      <div className="mt-4 text-center">
-        <h3 className="font-semibold mb-2">Your Results:</h3>
-        <ul>
-          {attempts.map((attempt, i) => (
-            <li
-              key={i}
-              className={`py-1 ${feedback[i]
-                ? "text-green-600 font-semibold"
-                : "text-red-500 font-semibold"
-                }`}
-            >
-              Attempt {i + 1}: {attempt} — {feedback[i] ? "Correct ✅" : "Wrong ❌"}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
-
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+      <Toaster position="top-center" />
       <h1 className="text-2xl font-bold text-center mb-4">Spelling Practice</h1>
 
       {!selectedCategory ? (
@@ -219,8 +228,8 @@ export default function PracticeMode() {
               onClick={goToPreviousWord}
               disabled={currentWordIndex === 0}
               className={`flex items-center gap-1 px-4 py-2 border rounded transition ${currentWordIndex === 0
-                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                  : "bg-blue-500 text-white hover:bg-blue-600"
+                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
                 }`}
             >
               ⬅️ Previous
@@ -230,8 +239,8 @@ export default function PracticeMode() {
               onClick={goToNextWord}
               disabled={currentWordIndex === words.length - 1}
               className={`flex items-center gap-1 px-4 py-2 border rounded transition ${currentWordIndex === words.length - 1
-                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                  : "bg-green-500 text-white hover:bg-green-600"
+                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                : "bg-green-500 text-white hover:bg-green-600"
                 }`}
             >
               Next ➡️
@@ -249,7 +258,6 @@ export default function PracticeMode() {
 
           {renderAttemptInput()}
           {renderKeyboard()}
-          {isFeedbackVisible && renderFeedback()}
         </>
       )}
     </div>
