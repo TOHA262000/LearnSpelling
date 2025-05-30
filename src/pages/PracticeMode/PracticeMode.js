@@ -3,7 +3,7 @@ import WordData from "../../data/WordData";
 import formatCategoryName from "../../components/formatCategoryName";
 import useSpeechSynthesis from "../../hook/useSpeechSynthesis";
 export default function PracticeMode() {
-  const { speak,selectedVoice } = useSpeechSynthesis();
+  const { speak } = useSpeechSynthesis();
   const [started, setStarted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [words, setWords] = useState([]);
@@ -59,15 +59,6 @@ export default function PracticeMode() {
     }
   };
 
-  const showFeedback = () => {
-    const results = attempts.map((a) => a.toLowerCase() === currentWord.toLowerCase());
-    setFeedback(results);
-    setIsFeedbackVisible(true);
-    setTimeout(() => {
-      goToNextWord();
-    }, 2500);
-  };
-
   const goToNextWord = () => {
     if (currentWordIndex + 1 < words.length) {
       setCurrentWordIndex(currentWordIndex + 1);
@@ -80,7 +71,25 @@ export default function PracticeMode() {
       setStarted(false);
     }
   };
-
+  const goToPreviousWord = () => {
+    if (currentWordIndex > 0) {
+      setCurrentWordIndex(currentWordIndex - 1);
+      setAttempts(["", "", ""]);
+      setCurrentAttempt(0);
+      setFeedback([]);
+      setIsFeedbackVisible(false);
+      speak(words[currentWordIndex - 1]);
+    }
+  };
+  const handleBackToCategory = () => {
+    setSelectedCategory("");
+    setStarted(false);
+    setCurrentWordIndex(0);
+    setAttempts(["", "", ""]);
+    setCurrentAttempt(0);
+    setFeedback([]);
+    setIsFeedbackVisible(false);
+  };
   const renderKeyboard = () => {
     const layout = [
       ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -198,14 +207,38 @@ export default function PracticeMode() {
             Word {currentWordIndex + 1} of {words.length}
           </p>
 
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 space-x-2">
             <button
               onClick={() => speak(currentWord)}
               className="text-blue-600 underline"
             >
               🔊 Listen
             </button>
+
+            <button
+              onClick={goToPreviousWord}
+              disabled={currentWordIndex === 0}
+              className={`px-4 py-1 border rounded ${currentWordIndex === 0 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white hover:bg-blue-600"}`}
+            >
+              ⬅️ Previous Word
+            </button>
+
+            <button
+              onClick={goToNextWord}
+              disabled={currentWordIndex === words.length - 1}
+              className={`px-4 py-1 border rounded ${currentWordIndex === words.length - 1 ? "bg-gray-300 cursor-not-allowed" : "bg-green-500 text-white hover:bg-green-600"}`}
+            >
+              ➡️ Next Word
+            </button>
+
+            <button
+              onClick={handleBackToCategory}
+              className="px-4 py-1 border rounded bg-red-500 text-white hover:bg-red-600"
+            >
+              🔙 Choose Another Category
+            </button>
           </div>
+
 
           {renderAttemptInput()}
           {renderKeyboard()}

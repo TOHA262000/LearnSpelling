@@ -30,6 +30,10 @@ export default function useSpeechSynthesis() {
       console.warn("Voice not loaded yet");
       return;
     }
+    // 🔧 Cancel any ongoing speech before starting new one
+    if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+      window.speechSynthesis.cancel();
+    }
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = selectedVoice;
     utterance.rate = options.rate || 1.0;
